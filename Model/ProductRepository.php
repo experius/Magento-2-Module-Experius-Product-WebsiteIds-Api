@@ -4,7 +4,7 @@ namespace Experius\ProductWebsiteIdsApi\Model;
 
 class ProductRepository extends \Magento\Catalog\Model\ProductRepository
 {
-    
+
     /**
      * Merge data from DB and updates from request
      *
@@ -24,6 +24,9 @@ class ProductRepository extends \Magento\Catalog\Model\ProductRepository
             if (!$this->storeManager->hasSingleStore()) {
                 $product->setWebsiteIds(array_unique($websiteIds));
             }
+        } else {
+            /** BUGFIX - Solves incorrect auto assign to a website when setting storeview value */
+            $product->unsetData('website_ids');
         }
         return $product;
     }
