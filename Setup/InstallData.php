@@ -9,6 +9,9 @@ use Magento\Framework\Setup\ModuleContextInterface;
 use Magento\Eav\Setup\EavSetupFactory;
 use Magento\Framework\Setup\ModuleDataSetupInterface;
 
+/**
+ * phpcs:ignoreFile
+ */
 class InstallData implements InstallDataInterface {
 
 	private $eavSetupFactory;
