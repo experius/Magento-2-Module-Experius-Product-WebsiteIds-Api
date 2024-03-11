@@ -4,7 +4,6 @@ namespace Experius\ProductWebsiteIdsApi\Model;
 
 class ProductRepository extends \Magento\Catalog\Model\ProductRepository
 {
-
     /**
      * Merge data from DB and updates from request
      *
@@ -25,8 +24,13 @@ class ProductRepository extends \Magento\Catalog\Model\ProductRepository
                 $product->setWebsiteIds(array_unique($websiteIds));
             }
         } else {
-            /** BUGFIX - Solves incorrect auto assign to a website when setting storeview value */
-            $product->unsetData('website_ids');
+            if ($product->isObjectNew()) {
+                /** Objectmanager because extending the whole constructor of core ProductRepository will be too complex to maintain */
+                $scopeConfig = \Magento\Framework\App\ObjectManager::getInstance()->get(\Magento\Framework\App\Config\ScopeConfigInterface::class);
+                $websiteIds = $scopeConfig->getValue('webapi/experius_api_extend/product_store_autoassign');
+                $websiteArray = ( $websiteIds ? explode(',', $websiteIds) : [] );
+                $product->setWebsiteIds($websiteArray);
+            }
         }
         return $product;
     }

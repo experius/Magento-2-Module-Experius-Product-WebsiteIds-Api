@@ -1,0 +1,15 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="webapi" translate="label" type="text" sortOrder="102" showInDefault="1" showInWebsite="0" showInStore="0">
+            <group id="experius_api_extend" translate="label" type="text" sortOrder="300" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Experius - API Extend</label>
+                <field id="product_store_autoassign" showInDefault="1" showInStore="0" showInWebsite="0" sortOrder="10" translate="label" type="multiselect" canRestore="1">
+                    <label>Auto Assign Products to Stores</label>
+                    <comment>Leave blank to assign products created via the API no to stores</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Website</source_model>
+                    <can_be_empty>1</can_be_empty>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>
